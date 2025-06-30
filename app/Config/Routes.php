@@ -15,4 +15,6 @@ $routes->get('login','auth-login-basic.html::index');
 
 $routes->get('produk', 'ProdukController::index', ['filter' => 'auth']);
 $routes->get('keranjang', 'TransaksiController::index', ['filter' => 'auth']);
+
+$routes->get('dashboard', 'DashboardController::index');
 ;
