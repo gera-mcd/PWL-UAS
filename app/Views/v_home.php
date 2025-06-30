@@ -13,11 +13,8 @@
   <div class="row">
     <div class="col-lg-12 mb-4 order-0">
       <h5 class="text-primary mb-3">Welcome 👋</h5>
-    </div>
-  </div>
-</div>
 
-<!-- Carousel Start -->
+      <!-- Carousel Start -->
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
@@ -62,5 +59,8 @@
         </button>
       </div>
       <!-- Carousel End -->
+    </div>
+  </div>
+</div>
 
 <?= $this->endSection() ?>
