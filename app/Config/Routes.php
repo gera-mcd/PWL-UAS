@@ -12,4 +12,7 @@ $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
  
 $routes->get('login','auth-login-basic.html::index');
+
+$routes->get('produk', 'ProdukController::index', ['filter' => 'auth']);
+$routes->get('keranjang', 'TransaksiController::index', ['filter' => 'auth']);
 ;
