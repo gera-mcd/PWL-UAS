@@ -12,7 +12,7 @@ if (uri_string() != "") {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><?= $hlm ?> - <?= $title ?? 'Hpinaja' ?></title>
+  <title><?= $hlm ?> - <?= $title ?? 'Zellion' ?></title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="<?= base_url('sneat-1.0.0/assets/img/favicon/favicon.ico') ?>" />
@@ -21,6 +21,7 @@ if (uri_string() != "") {
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/vendor/fonts/boxicons.css') ?>" />
 
   <!-- Core CSS -->
+  <link rel="stylesheet" href="<?= base_url('MiniStore-1.0.0/css/bootstrap.min.css') ?>" />
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/vendor/css/core.css') ?>" class="template-customizer-core-css" />
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/vendor/css/theme-default.css') ?>" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/css/demo.css') ?>" />
@@ -61,7 +62,7 @@ if (uri_string() != "") {
           <footer class="content-footer footer bg-footer-theme">
             <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
               <div class="mb-2 mb-md-0">
-                © <?= date('Y') ?>, made with ❤️ by Hpinaja
+                © <?= date('Y') ?>, made by Zellion
               </div>
               <div>
                 <a href="#" class="footer-link me-4">About</a>
@@ -86,9 +87,9 @@ if (uri_string() != "") {
   <!-- / Layout wrapper -->
 
   <!-- Core JS -->
+  <script src="<?= base_url('MiniStore-1.0.0/js/bootstrap.bundle.min.js') ?>"></script>
   <script src="<?= base_url('sneat-1.0.0/assets/vendor/libs/jquery/jquery.js') ?>"></script>
   <script src="<?= base_url('sneat-1.0.0/assets/vendor/libs/popper/popper.js') ?>"></script>
-  <script src="<?= base_url('sneat-1.0.0/assets/vendor/js/bootstrap.js') ?>"></script>
   <script src="<?= base_url('sneat-1.0.0/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') ?>"></script>
   <script src="<?= base_url('sneat-1.0.0/assets/vendor/js/menu.js') ?>"></script>
 
