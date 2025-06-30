@@ -5,5 +5,11 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/home', 'Home::index');
-$routes->get('/', 'login::index');
+$routes->get('/', 'Home::index', ['filter' => 'auth']);
+
+$routes->get('login', 'AuthController::login');
+$routes->post('login', 'AuthController::login');
+$routes->get('logout', 'AuthController::logout');
+ 
+$routes->get('login','auth-login-basic.html::index');
+;
