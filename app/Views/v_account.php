@@ -44,7 +44,8 @@
 
         <hr class="my-0" />
         <div class="card-body">
-          <form id="formAccountSettings" method="POST" onsubmit="return false">
+          <form action="<?= base_url('account/update') ?>" method="post">
+
             <div class="row">
             <!-- First Name -->
 <div class="mb-3">
