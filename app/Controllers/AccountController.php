@@ -2,27 +2,63 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Models\UserModel;
 
 class AccountController extends BaseController
 {
-    public function index()
-    {
-        $username = session()->get('username');
-        $userModel = new UserModel();
+    protected $userModel;
 
-        $data['user'] = $userModel->where('username', $username)->first();
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+        helper(['form', 'url']);
+    }
+
+    public function profile()
+    {
+        $session = session();
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('login');
+        }
+
+        $data = [
+            'username' => $session->get('username'),
+            'role' => $session->get('role'),
+            'title' => 'Profile'
+        ];
+
+        return view('v_profile', $data);
+    }
+
+    public function account()
+    {
+        $session = session();
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('login');
+        }
+
+        $username = $session->get('username');
+        $userData = $this->userModel->where('username', $username)->first();
+
+        $data = [
+            'user' => $userData,
+            'title' => 'Account Details'
+        ];
 
         return view('v_account', $data);
     }
 
-    public function update()
+    public function updateAccount()
     {
-        $sessionUsername = session()->get('username');
-        $userModel = new UserModel();
+        $session = session();
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('login');
+        }
 
-        $user = $userModel->where('username', $sessionUsername)->first();
+        $currentUsername = $session->get('username');
 
+        $user = $this->userModel->where('username', $currentUsername)->first();
         if (!$user) {
             return redirect()->back()->with('error', 'User tidak ditemukan.');
         }
@@ -30,14 +66,14 @@ class AccountController extends BaseController
         $newUsername = $this->request->getPost('username');
         $newEmail    = $this->request->getPost('email');
 
-        $userModel->update($user['id'], [
+        $this->userModel->update($user['id'], [
             'username' => $newUsername,
             'email'    => $newEmail,
         ]);
 
-        // Perbarui session jika username diubah
-        session()->set('username', $newUsername);
+        // Update session jika username berubah
+        $session->set('username', $newUsername);
 
-        return redirect()->to('/account')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->to('/account')->with('success', 'Akun berhasil diperbarui.');
     }
 }
