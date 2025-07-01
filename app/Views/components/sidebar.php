@@ -42,11 +42,7 @@ $segment1 = $uri->getSegment(1);
             <div data-i18n="Without menu">Keranjang</div>
           </a>
         </li>
-        <li class="menu-item <?= ($segment1 == 'profile') ? 'active' : '' ?>">
-          <a href="<?= base_url('profile') ?>" class="menu-link">
-            <div data-i18n="Without navbar">Profile</div>
-          </a>
-        </li>
+        
       </ul>
     </li>
 
@@ -60,6 +56,11 @@ $segment1 = $uri->getSegment(1);
         <div data-i18n="Account Settings">Account Settings</div>
       </a>
       <ul class="menu-sub">
+        <li class="menu-item <?= ($segment1 == 'profile') ? 'active' : '' ?>">
+          <a href="<?= base_url('profile') ?>" class="menu-link">
+            <div data-i18n="Without navbar">Profile</div>
+          </a>
+        </li>
         <li class="menu-item <?= ($segment1 == 'account') ? 'active' : '' ?>">
           <a href="<?= base_url('account') ?>" class="menu-link">
             <div data-i18n="Account">Account</div>
