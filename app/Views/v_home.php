@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
 
 <style>
-  .carousel-caption h5,
+  .carousel-caption h10,
   .carousel-caption p {
     color: #fff;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
@@ -26,7 +26,7 @@
           <!-- Slide 1 -->
           <div class="carousel-item active">
             <img src="<?= base_url('sneat-1.0.0/assets/img/illustrations/ipone.jpg') ?>" class="d-block w-100" style="object-fit: cover; height: 100%;" alt="Slide 1">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption d-block">
               <h5>iPhone Pro Max</h5>
               <p>Teknologi mutakhir dalam genggaman Anda.</p>
             </div>
