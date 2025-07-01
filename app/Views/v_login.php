@@ -73,6 +73,12 @@
               <h4 class="mb-2">Welcome to Zellion 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
+              <?php if(session()->getFlashdata('failed')): ?>
+              <div class="alert alert-danger" role="alert">
+                <?= session()->getFlashdata('failed') ?>
+              </div>
+              <?php endif; ?>
+
               <form id="formAuthentication" class="mb-3" action="/login" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">Email or Username</label>
