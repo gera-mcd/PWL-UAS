@@ -12,7 +12,7 @@ class AccountController extends BaseController
     public function __construct()
     {
         $this->userModel = new UserModel();
-        helper(['form', 'url']);
+        helper('form');
     }
 
     public function profile()
@@ -47,33 +47,5 @@ class AccountController extends BaseController
         ];
 
         return view('v_account', $data);
-    }
-
-    public function updateAccount()
-    {
-        $session = session();
-        if (!$session->get('isLoggedIn')) {
-            return redirect()->to('login');
-        }
-
-        $currentUsername = $session->get('username');
-
-        $user = $this->userModel->where('username', $currentUsername)->first();
-        if (!$user) {
-            return redirect()->back()->with('error', 'User tidak ditemukan.');
-        }
-
-        $newUsername = $this->request->getPost('username');
-        $newEmail    = $this->request->getPost('email');
-
-        $this->userModel->update($user['id'], [
-            'username' => $newUsername,
-            'email'    => $newEmail,
-        ]);
-
-        // Update session jika username berubah
-        $session->set('username', $newUsername);
-
-        return redirect()->to('/account')->with('success', 'Akun berhasil diperbarui.');
     }
 }

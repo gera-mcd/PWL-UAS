@@ -20,5 +20,12 @@ $routes->get('profile','AccountController::profile', ['filter' => 'auth']);
 $routes->get('account','AccountController::account', ['filter' => 'auth']);
 
 $routes->get('dashboard', 'DashboardController::index');
-   
-;
+
+$routes->group('produk', ['filter' => 'auth'], function ($routes) { 
+    $routes->get('', 'ProdukController::index');
+    $routes->post('', 'ProdukController::create');
+    $routes->post('edit/(:any)', 'ProdukController::edit/$1');
+    $routes->get('delete/(:any)', 'ProdukController::delete/$1');
+
+    
+});
