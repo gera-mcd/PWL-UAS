@@ -4,15 +4,15 @@
 <style>
   .carousel-caption h5,
   .carousel-caption p {
-    color: #fff; 
+    color: #fff;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   }
 </style>
 
-<div class="container-xxl flex-grow-1 container-p-y">
+<!-- Pangkas padding agar mendekati search -->
+<div class="container-xxl flex-grow-1" style="padding-top: 0;">
   <div class="row">
-    <div class="col-lg-12 mb-4 order-0">
-      <h5 class="text-primary mb-3">Welcome 👋</h5>
+    <div class="col-lg-12 order-0">
 
       <!-- Carousel Start -->
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -22,7 +22,7 @@
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
         </div>
 
-        <div class="carousel-inner" style="height: 340px; border-radius: 12px; overflow: hidden;">
+        <div class="carousel-inner" style="height: 300px; border-radius: 12px; overflow: hidden;">
           <!-- Slide 1 -->
           <div class="carousel-item active">
             <img src="<?= base_url('sneat-1.0.0/assets/img/illustrations/ipone.jpg') ?>" class="d-block w-100" style="object-fit: cover; height: 100%;" alt="Slide 1">
@@ -59,6 +59,7 @@
         </button>
       </div>
       <!-- Carousel End -->
+
     </div>
   </div>
 </div>
