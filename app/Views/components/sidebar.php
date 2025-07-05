@@ -9,6 +9,7 @@ $role = session()->get('role');
   <div class="app-brand demo">
     <a href="/" class="app-brand-link">
       <span class="app-brand-logo demo"></span>
+      <img src="<?= base_url('img/logo/logo.png') ?>" alt="Logo Zellion" style="height: 45px;" />
       <span class="app-brand-text demo menu-text fw-bolder ms-2">Zellion</span>
     </a>
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -94,6 +95,7 @@ $role = session()->get('role');
   <div class="app-brand demo">
     <a href="/" class="app-brand-link">
       <span class="app-brand-logo demo"></span>
+      <img src="<?= base_url('img/logo/logo.png') ?>" alt="Logo Zellion" style="height: 45px;" />
       <span class="app-brand-text demo menu-text fw-bolder ms-2">Zellion</span>
     </a>
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">

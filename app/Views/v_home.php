@@ -48,12 +48,11 @@
         $selectedCategory = isset($selectedCategory) ? $selectedCategory : '';
       ?>
       <?php foreach ($categories as $key => $label): ?>
-        <a href="<?= base_url('home?category=' . $key) ?>" class="btn btn-outline-primary <?= ($selectedCategory === $key) ? 'active' : '' ?>">
+        <a href="<?= base_url('produk/category?category=' . $key) ?>"class="btn btn-outline-primary <?= ($selectedCategory === $key) ? 'active' : '' ?>">
           <?= $label ?>
         </a>
       <?php endforeach; ?>
       <a href="<?= base_url('home') ?>" class="btn btn-outline-secondary <?= ($selectedCategory === '') ? 'active' : '' ?>">All</a>
-    </div>
 
     <?php foreach ($product as $item): ?>
     <div class="col-md-3 mb-4">
