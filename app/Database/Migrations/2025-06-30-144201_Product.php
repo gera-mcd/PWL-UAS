@@ -20,6 +20,11 @@ class Product extends Migration
                 'constraint' => 255,
                 'null' => FALSE,
             ],
+            'category' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE,
+            ],
             'harga' => [
                 'type' => 'DOUBLE',
                 'null' => FALSE,
@@ -32,6 +37,11 @@ class Product extends Migration
             'foto' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+            ],
+            'berat' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => FALSE,
             ],
             'created_at' => [
                 'type' => 'datetime',
