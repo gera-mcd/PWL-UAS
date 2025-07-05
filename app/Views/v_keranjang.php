@@ -1,5 +1,7 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
+<?php helper(['form', 'number']); ?>
+<?= form_open('keranjang/update') ?>
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4>Keranjang</h4>
 </div>
@@ -16,35 +18,50 @@
     </tr>
   </thead>
   <tbody>
-    <?php if (!empty($cartItems) && is_array($cartItems)): ?>
-      <?php foreach ($cartItems as $item): ?>
-        <tr>
-          <td><img src="<?= base_url('uploads/' . esc($item['foto'])) ?>" alt="<?= esc($item['nama']) ?>" style="width: 60px; height: auto;"></td>
-          <td><?= esc($item['nama']) ?></td>
-          <td><?= esc(number_format($item['harga'], 0, ',', '.')) ?></td>
-          <td><?= esc($item['jumlah']) ?></td>
-          <td><?= esc(number_format($item['harga'] * $item['jumlah'], 0, ',', '.')) ?></td>
-          <td class="text-end">
-            <button class="btn btn-sm btn-warning me-2 btn-edit" data-id="<?= esc($item['id']) ?>"><i class="bx bx-edit"></i> Edit</button>
-            <button class="btn btn-sm btn-danger btn-delete" data-id="<?= esc($item['id']) ?>"><i class="bx bx-trash"></i> Hapus</button>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-    <?php else: ?>
-      <tr>
-        <td colspan="6" class="text-center">Keranjang kosong</td>
-      </tr>
-    <?php endif; ?>
-  </tbody>
+    <?php if (!empty($keranjang) && is_array($keranjang)) : ?>
+            <?php $no = 1; $total = 0; ?>
+            <?php foreach ($keranjang as $item) : ?>
+                <tr>
+                    <td>
+                        <?php if (!empty($item['foto'])) : ?>
+                            <img src="<?= base_url('img/' . $item['foto']) ?>" width="100px" alt="Foto Produk">
+                        <?php else : ?>
+                            Tidak ada foto
+                        <?php endif; ?>
+                    </td>
+                    <td><?= esc($item['nama']) ?></td>
+                    <td><?= number_to_currency($item['harga'], 'IDR') ?></td>
+                    <td>
+                        <input type="number" name="jumlah[<?= esc($item['id']) ?>]" value="<?= esc($item['jumlah']) ?>" min="1" class="form-control" />
+                    </td>
+                    <td><?= number_to_currency($item['harga'] * $item['jumlah'], 'IDR') ?></td>
+                    <td>
+                        <a href="<?= base_url('keranjang/remove/' . esc($item['id'])) ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus item ini?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                <?php $total += $item['harga'] * $item['jumlah']; ?>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <tr>
+                <td colspan="6" class="text-center">Keranjang kosong</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
 </table>
+<!-- End Table with stripped rows -->
+<div class="alert alert-info">
+    <?php echo "Total = " . number_to_currency($total ?? 0, 'IDR') ?>
+</div>
 
-<script>
-  document.querySelectorAll('.btn-delete').forEach(button => {
-    button.addEventListener('click', function() {
-      const id = this.getAttribute('data-id');
-      alert('Hapus produk dengan ID: ' + id + ' belum diimplementasikan.');
-    });
-  });
-</script>
+<div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">Perbarui Keranjang</button>
+    <a class="btn btn-warning" href="<?php echo base_url() ?>keranjang/clear">Kosongkan Keranjang</a>
+    <?php if (!empty($keranjang)) : ?>
+        <a class="btn btn-success" href="<?php echo base_url('checkout') ?>">Selesai Belanja</a>
+    <?php endif; ?>
+</div>
 
+<?= form_close() ?>
 <?= $this->endSection() ?>
