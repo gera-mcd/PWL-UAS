@@ -8,15 +8,15 @@ class ProductModel extends Model
 	protected $table = 'product'; 
 	protected $primaryKey = 'id';
 	protected $allowedFields = [
-		'nama','harga','jumlah','foto','created_at','updated_at'
+		'nama','harga','jumlah','foto','category','weight','created_at','updated_at'
 	];  
 
-    public function getProductsAndSoldCount()
+    public function getSoldProducts()
     {
-        $builder = $this->db->table($this->table . ' p');
-        $builder->select('p.*, IFNULL(SUM(td.jumlah), 0) as sold_produk');
-        $builder->join('transaction_detail td', 'p.id = td.product_id', 'left');
-        $builder->groupBy('p.id');
+        $builder = $this->db->table('transaction_detail td');
+        $builder->select('p.nama, p.harga, SUM(td.jumlah) as jumlah, SUM(td.subtotal_harga) as total');
+        $builder->join('product p', 'p.id = td.product_id');
+        $builder->groupBy('p.id, p.nama, p.harga');
         $query = $builder->get();
         return $query->getResultArray();
     }

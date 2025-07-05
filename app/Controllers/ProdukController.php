@@ -112,4 +112,60 @@ public function download()
     $dompdf->stream($filename);
 }
 
+public function category()
+{
+    $category = $this->request->getGet('category');
+    $role = session()->get('role');
+
+    if ($category) {
+        $product = $this->product
+            ->where('LOWER(category)', strtolower($category))
+            ->findAll();
+    } else {
+        $product = $this->product->findAll();
+    }
+
+    $data = [
+        'product' => $product,
+        'selectedCategory' => $category ?? '',
+        'role' => $role,
+    ];
+
+    // Tampilkan view berdasarkan peran user
+    if ($role === 'guest') {
+        return view('v_homeUser', $data);
+    } else {
+        return view('v_home', $data);
+    }
+}
+
+
+public function search()
+{
+    $keyword = $this->request->getGet('keyword');
+    $role = session()->get('role');
+
+    if ($keyword) {
+        $product = $this->product
+            ->like('nama', $keyword)
+            ->findAll();
+    } else {
+        $product = $this->product->findAll();
+    }
+
+    $data = [
+        'product' => $product,
+        'selectedCategory' => '', // kosongkan filter category
+        'role' => $role,
+        'searchKeyword' => $keyword,
+    ];
+
+    // Tampilkan ke view yang sesuai role
+    if ($role === 'guest') {
+        return view('v_homeUser', $data);
+    } else {
+        return view('v_home', $data);
+    }
+}
+
 }
