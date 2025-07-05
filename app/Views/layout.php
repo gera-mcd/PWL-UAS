@@ -21,7 +21,6 @@ if (uri_string() != "") {
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/vendor/fonts/boxicons.css') ?>" />
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="<?= base_url('MiniStore-1.0.0/css/bootstrap.min.css') ?>" />
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/vendor/css/core.css') ?>" class="template-customizer-core-css" />
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/vendor/css/theme-default.css') ?>" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="<?= base_url('sneat-1.0.0/assets/css/demo.css') ?>" />
@@ -102,7 +101,15 @@ if (uri_string() != "") {
   <!-- Page JS -->
   <script src="<?= base_url('sneat-1.0.0/assets/js/dashboards-analytics.js') ?>"></script>
 
-  
+  <!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+
+  
+<?= $this->renderSection('script') ?> 
 </body>
 </html>
