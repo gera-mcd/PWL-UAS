@@ -18,6 +18,7 @@
       <th>Nama Produk</th>
       <th>Harga</th>
       <th>Jumlah</th>
+      <th>Sold</th>
       <th class="text-end">Aksi</th>
     </tr>
   </thead>
@@ -29,6 +30,7 @@
           <td><?= esc($product['nama']) ?></td>
           <td><?= esc(number_format($product['harga'], 0, ',', '.')) ?></td>
           <td><?= esc($product['jumlah']) ?></td>
+          <td><?= esc($product['sold_produk']) ?></td>
           <td class="text-end">
             <button class="btn btn-sm btn-warning me-2 btn-edit" data-id="<?= esc($product['id']) ?>"><i class="bx bx-edit"></i> Edit</button>
             <button class="btn btn-sm btn-danger btn-delete" data-id="<?= esc($product['id']) ?>"><i class="bx bx-trash"></i> Hapus</button>
@@ -37,7 +39,7 @@
       <?php endforeach; ?>
     <?php else: ?>
       <tr>
-        <td colspan="5" class="text-center">Tidak ada produk</td>
+        <td colspan="7" class="text-center">Tidak ada produk</td>
       </tr>
     <?php endif; ?>
   </tbody>
