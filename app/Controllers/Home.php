@@ -15,9 +15,24 @@ class Home extends BaseController
     
     public function index()
     {
-        $product = $this->product->findAll();
-        $data['product'] = $product;
+        $role = session()->get('role');
+        $category = $this->request->getGet('category');
+        $productModel = new ProductModel();
 
-        return view('v_home', $data);
+       if ($role === 'admin') {
+            if ($category) {
+                $products = $productModel->where('category', $category)->findAll();
+            } else {
+                $products = $productModel->findAll();
+            }
+            return view('v_home', ['product' => $products, 'selectedCategory' => $category]);
+        } else {
+            if ($category) {
+                $products = $productModel->where('category', $category)->findAll();
+            } else {
+                $products = $productModel->findAll();
+            }
+            return view('v_homeUser', ['product' => $products, 'selectedCategory' => $category]);
+        }
     }
 }
