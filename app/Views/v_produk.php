@@ -107,3 +107,52 @@
     </tbody>
 </table>
 <!-- End Table -->
+
+<!-- Add Modal Begin -->
+<div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-header">
+                <a type="button" class="btn btn-success" href="base_url() ?> produk/download">Download Data</a>
+               
+            </div>
+
+            <form action="<?= base_url('produk') ?>" method="post" enctype="multipart/form-data">
+                <?= csrf_field(); ?>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama">Nama</label>
+                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Nama Barang" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input type="text" name="harga" class="form-control" id="harga" placeholder="Harga Barang" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah">Jumlah</label>
+                        <input type="text" name="jumlah" class="form-control" id="jumlah" placeholder="Jumlah Barang" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Bobot (gram)</label>
+                        <input type="number" name="weight" class="form-control" id="weight" placeholder="Bobot Barang dalam gram" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <input type="file" class="form-control" id="foto" name="foto">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Add Modal End -->
+
+<?= $this->endSection() ?>
