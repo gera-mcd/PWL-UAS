@@ -37,6 +37,9 @@ $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->get('clear', 'TransaksiController::clear');
 });
 
+$routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']);
+
+
 $routes->get('home', 'ProdukController::category', ['filter' => 'auth']);
 $routes->get('produk/category', 'ProdukController::category', ['filter' => 'auth']);
 $routes->get('produk/search', 'ProdukController::search', ['filter' => 'auth']);
