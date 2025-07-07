@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProductModel;
+use Dompdf\Dompdf;
 
 class ProdukController extends BaseController
 {
@@ -26,7 +27,7 @@ class ProdukController extends BaseController
         $data['sold_produk'] = $sold_produk;
         return view('sold_produk', $data);
     }
-    public function create()
+public function create()
 {
     $dataFoto = $this->request->getFile('foto');
 
@@ -34,6 +35,7 @@ class ProdukController extends BaseController
         'nama' => $this->request->getPost('nama'),
         'harga' => $this->request->getPost('harga'),
         'jumlah' => $this->request->getPost('jumlah'),
+        'weight' => $this->request->getPost('weight'),
         'created_at' => date("Y-m-d H:i:s")
     ];
 
@@ -56,6 +58,7 @@ public function edit($id)
         'nama' => $this->request->getPost('nama'),
         'harga' => $this->request->getPost('harga'),
         'jumlah' => $this->request->getPost('jumlah'),
+        'weight' => $this->request->getPost('weight'),
         'updated_at' => date("Y-m-d H:i:s")
     ];
 
@@ -173,5 +176,4 @@ public function search()
         return view('v_home', $data);
     }
 }
-
 }
