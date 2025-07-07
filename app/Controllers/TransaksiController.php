@@ -84,5 +84,36 @@ class TransaksiController extends BaseController
 
         return redirect()->to('/keranjang')->with('success', 'Keranjang berhasil dikosongkan');
     }
+    public function checkout()
+    {
+        helper('number');
+        $session = session();
+        $cart = $session->get('cart') ?? [];
+
+        $items = [];
+        $total = 0;
+        $totalWeight = 0;
+
+        foreach ($cart as $item) {
+            $items[] = [
+                'id' => $item['id'] ?? null,
+                'name' => $item['nama'],
+                'price' => $item['harga'],
+                'qty' => $item['jumlah'],
+                'weight' => $item['weight'] ?? 0,
+                'options' => [
+                    'foto' => $item['foto'] ?? null
+                ]
+            ];
+            $total += $item['harga'] * $item['jumlah'];
+            $totalWeight += ($item['weight'] ?? 0) * $item['jumlah'];
+        }
+
+        $data['items'] = $items;
+        $data['total'] = $total;
+        $data['totalWeight'] = $totalWeight;
+
+        return view('v_checkout', $data);
+    }
 }
 
