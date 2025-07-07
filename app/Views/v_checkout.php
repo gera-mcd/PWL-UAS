@@ -74,3 +74,65 @@
 
 <?= $this->endSection() ?>
 <?= $this->section('script') ?>
+
+<script>
+let ongkir = 0;
+let total = <?= $total ?>;
+let totalWeight = <?= $totalWeight ?>;
+let baseUrl = '<?= base_url() ?>';
+
+$(document).ready(function () {
+    function hitungTotal() {
+        $("#ongkir").val(ongkir);
+        $("#total").html("IDR " + (total + ongkir).toLocaleString('id-ID'));
+        $("#total_harga").val(total + ongkir);
+    }
+
+    $('#kelurahan').select2({
+        placeholder: 'Cari kelurahan...',
+        ajax: {
+            url: baseUrl + '/get-location',
+            dataType: 'json',
+            delay: 500,
+            data: params => ({ search: params.term }),
+            processResults: data => ({
+                results: data.map(item => ({
+                    id: item.id,
+                    text: item.subdistrict_name + ", " + item.city_name
+                }))
+            }),
+            cache: true
+        },
+        minimumInputLength: 3
+    });
+
+    $("#kelurahan").on('change', function () {
+        let destination = $(this).val();
+        $("#layanan").empty();
+
+        $.ajax({
+            url: "<?= site_url('get-cost') ?>",
+            type: 'GET',
+            data: {
+                destination: destination,
+                weight: totalWeight > 0 ? totalWeight : 1000
+            },
+            dataType: 'json',
+            success: function (data) {
+                data.forEach(item => {
+                    let text = `${item.description} (${item.service}) - Estimasi ${item.etd}`;
+                    $("#layanan").append(`<option value="${item.cost}">${text}</option>`);
+                });
+
+                $("#layanan").prop('selectedIndex', 0).trigger('change');
+            }
+        });
+    });
+
+    $("#layanan").on('change', function () {
+        ongkir = parseInt($(this).val());
+        hitungTotal();
+    });
+});
+</script>
+<?= $this->endSection() ?>
