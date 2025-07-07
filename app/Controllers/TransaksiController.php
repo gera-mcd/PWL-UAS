@@ -115,5 +115,68 @@ class TransaksiController extends BaseController
 
         return view('v_checkout', $data);
     }
+    public function getLocation()
+{
+		//keyword pencarian yang dikirimkan dari halaman checkout
+    $search = $this->request->getGet('search');
+
+    $response = $this->client->request(
+        'GET', 
+        'https://rajaongkir.komerce.id/api/v1/destination/domestic-destination?search='.$search.'&limit=50', [
+            'headers' => [
+                'accept' => 'application/json',
+                'key' => $this->apiKey,
+            ],
+        ]
+    );
+
+    $body = json_decode($response->getBody(), true); 
+    return $this->response->setJSON($body['data']);
+}
+
+
+    public function getCost()
+    {
+        try {
+            $destination = $this->request->getGet('destination');
+            $weight = $this->request->getGet('weight') ?? 1000;
+
+            if (!$destination || !$weight) {
+                return $this->response->setStatusCode(400)->setJSON(['error' => 'Parameter tidak lengkap']);
+            }
+
+            $response = $this->client->request(
+                'POST',
+                'https://rajaongkir.komerce.id/api/v1/calculate/domestic-cost',
+                [
+                    'multipart' => [
+                        ['name' => 'origin', 'contents' => '58931'],
+                        ['name' => 'destination', 'contents' => $destination],
+                        ['name' => 'weight', 'contents' => $weight],
+                        ['name' => 'courier', 'contents' => 'jnt:jne:lion:sicepat:ninja']
+                    ],
+                    'headers' => [
+                        'accept' => 'application/json',
+                        'key' => $this->apiKey
+                    ]
+                ]
+            );
+
+            $body = json_decode($response->getBody(), true);
+
+            if (!isset($body['data'])) {
+                return $this->response->setStatusCode(500)->setJSON([
+                    'error' => 'Data tidak ditemukan',
+                    'response' => $body
+                ]);
+            }
+
+            return $this->response->setJSON($body['data']);
+        } catch (\Throwable $e) {
+            return $this->response->setStatusCode(500)->setJSON([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }
 
