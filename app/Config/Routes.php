@@ -26,8 +26,8 @@ $routes->group('produk', ['filter' => 'auth'], function ($routes) {
     $routes->post('', 'ProdukController::create');
     $routes->post('edit/(:any)', 'ProdukController::edit/$1');
     $routes->get('delete/(:any)', 'ProdukController::delete/$1');
-
-    
+    $routes->get('sold', 'ProdukController::soldProduk');
+    $routes->get('download', 'ProdukController::download');
 });
 
 $routes->get('home', 'ProdukController::category', ['filter' => 'auth']);
