@@ -178,5 +178,44 @@ class TransaksiController extends BaseController
             ]);
         }
     }
+    public function buy()
+    {
+        if ($this->request->getPost()) {
+            $dataForm = [
+                'username' => $this->request->getPost('username'),
+                'total_harga' => $this->request->getPost('total_harga'),
+                'alamat' => $this->request->getPost('alamat'),
+                'ongkir' => $this->request->getPost('ongkir'),
+                'status' => 0,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ];
+
+            $this->transaction->insert($dataForm);
+
+            $last_insert_id = $this->transaction->getInsertID();
+
+            $session = session();
+            $cart = $session->get('cart') ?? [];
+
+            foreach ($cart as $value) {
+                $dataFormDetail = [
+                    'transaction_id' => $last_insert_id,
+                    'product_id' => $value['id'],
+                    'jumlah' => $value['jumlah'],
+                    'diskon' => 0,
+                    'subtotal_harga' => $value['jumlah'] * $value['harga'],
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s")
+                ];
+
+                $this->transaction_detail->insert($dataFormDetail);
+            }
+
+            $session->remove('cart');
+
+            return redirect()->to(base_url());
+        }
+    }
 }
 
