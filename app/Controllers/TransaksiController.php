@@ -44,4 +44,45 @@ class TransaksiController extends BaseController
 
         return redirect()->to('/keranjang')->with('success', 'Produk berhasil ditambahkan ke keranjang');
     }
+    public function update()
+    {
+        $session = session();
+        $cart = $session->get('cart') ?? [];
+
+        $jumlah = $this->request->getPost('jumlah');
+
+        if ($jumlah && is_array($jumlah)) {
+            foreach ($jumlah as $productId => $qty) {
+                if (isset($cart[$productId])) {
+                    $cart[$productId]['jumlah'] = max(1, (int)$qty);
+                }
+            }
+        }
+
+        $session->set('cart', $cart);
+
+        return redirect()->to('/keranjang')->with('success', 'Keranjang berhasil diperbarui');
+    }
+
+    public function remove($productId)
+    {
+        $session = session();
+        $cart = $session->get('cart') ?? [];
+
+        if (isset($cart[$productId])) {
+            unset($cart[$productId]);
+            $session->set('cart', $cart);
+        }
+
+        return redirect()->to('/keranjang')->with('success', 'Produk berhasil dihapus dari keranjang');
+    }
+
+    public function clear()
+    {
+        $session = session();
+        $session->remove('cart');
+
+        return redirect()->to('/keranjang')->with('success', 'Keranjang berhasil dikosongkan');
+    }
 }
+
