@@ -6,7 +6,7 @@
     <div class="col-lg-12 mb-4 order-0">
       
 
-      <!-- Carousel Start -->
+       <!-- Carousel Start -->
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
@@ -15,19 +15,19 @@
         </div>
         <div class="carousel-inner" style="height: 340px; border-radius: 12px; overflow: hidden;">
           <div class="carousel-item active">
-            <img src="<?= base_url('img/iphone-16_og.png') ?>" class="d-block w-100" style="object-fit: cover; height: 100%;" alt="Slide 1">
+            <img src="<?= base_url('img/iphone-16_og.png') ?>" class="d-block w-100" style="object-fit: contain; height: 340px;" alt="Slide 1">
           </div>
           <div class="carousel-item">
-            <img src="<?= base_url('img/Samsung/Samsung-Galaxy-S25-Ultra-2.jpg') ?>" class="d-block w-100" style="object-fit: cover; height: 100%;" alt="Slide 2">
+            <img src="<?= base_url('img/Samsung/Samsung-Galaxy-S25-Ultra-2.jpg') ?>" class="d-block w-100" style="object-fit: contain; height: 340px;" alt="Slide 2">
           </div>
           <div class="carousel-item">
-            <img src="<?= base_url('img/Redmi/OIP.webp') ?>" class="d-block w-100" style="object-fit: cover; height: 100%;" alt="Slide 3">
+            <img src="<?= base_url('img/Redmi/OIP.webp') ?>" class="d-block w-100" style="object-fit: contain; height: 340px;" alt="Slide 3">
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="filter: invert(1);">
           <span class="carousel-control-prev-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="filter: invert(1);">
           <span class="carousel-control-next-icon"></span>
         </button>
       </div>
