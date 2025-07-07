@@ -7,6 +7,22 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class TransaksiController extends BaseController
 {
+    protected $cart;
+    protected $client;
+    protected $apiKey;
+    protected $transaction;
+    protected $transaction_detail;
+
+    function __construct()
+    {
+        helper('number');
+        helper('form');
+        $this->cart = \Config\Services::cart();
+        $this->client = new \GuzzleHttp\Client();
+        $this->apiKey = env('COST_KEY');
+        $this->transaction = new TransactionModel();
+        $this->transaction_detail = new TransactionDetailModel();
+    }
     public function index()
     {
         $session = session();
