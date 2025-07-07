@@ -29,6 +29,13 @@ $routes->group('produk', ['filter' => 'auth'], function ($routes) {
     $routes->get('sold', 'ProdukController::soldProduk');
     $routes->get('download', 'ProdukController::download');
 });
+$routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
+    $routes->get('', 'TransaksiController::index');
+     $routes->get('addToCart/(:num)', 'TransaksiController::addToCart/$1');
+    $routes->post('update', 'TransaksiController::update');
+    $routes->get('remove/(:num)', 'TransaksiController::remove/$1');
+    $routes->get('clear', 'TransaksiController::clear');
+});
 
 $routes->get('home', 'ProdukController::category', ['filter' => 'auth']);
 $routes->get('produk/category', 'ProdukController::category', ['filter' => 'auth']);
