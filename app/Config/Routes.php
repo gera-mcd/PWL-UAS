@@ -48,3 +48,4 @@ $routes->get('home', 'ProdukController::category', ['filter' => 'auth']);
 $routes->get('produk/category', 'ProdukController::category', ['filter' => 'auth']);
 $routes->get('produk/search', 'ProdukController::search', ['filter' => 'auth']);
 $routes->get('produk/detail/(:num)', 'ProdukController::detail/$1', ['filter' => 'auth']);
+$routes->get('infopesanan', 'Home::infoPesanan', ['filter' => 'auth']);
