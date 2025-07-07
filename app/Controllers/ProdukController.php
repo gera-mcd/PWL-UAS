@@ -20,6 +20,12 @@ class ProdukController extends BaseController
 
         return view('v_produk', $data);
     }
+    public function soldProduk()
+    {
+        $sold_produk = $this->product->getSoldProducts();
+        $data['sold_produk'] = $sold_produk;
+        return view('sold_produk', $data);
+    }
     public function create()
 {
     $dataFoto = $this->request->getFile('foto');
