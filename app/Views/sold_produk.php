@@ -16,6 +16,18 @@
   </thead>
   <tbody>
 
+    <?php
+
+    foreach ($sold_produk as $index => $produk): ?>
+    <tr>
+      <td><?= $index + 1 ?></td>
+      <td><?= htmlspecialchars($produk['nama'], ENT_QUOTES, 'UTF-8') ?></td>
+      <td>Rp <?= number_format($produk['harga'], 0, ',', '.') ?></td>
+      <td><?= htmlspecialchars($produk['jumlah'], ENT_QUOTES, 'UTF-8') ?></td>
+      <td>Rp <?= number_format($produk['total'], 0, ',', '.') ?></td>
+    </tr>
+    <?php endforeach; ?>
+
   </tbody>
 </table>
 <?= $this->endSection() ?>
