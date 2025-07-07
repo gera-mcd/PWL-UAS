@@ -3,7 +3,11 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\ProductModel;
+use GuzzleHttp\Client;
+use App\Models\TransactionModel;
+use App\Models\TransactionDetailModel;
+
 
 class TransaksiController extends BaseController
 {
