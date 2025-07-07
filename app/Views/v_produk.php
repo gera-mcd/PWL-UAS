@@ -1,76 +1,55 @@
 <?= $this->extend('layout') ?>
-<?= $this->section('content') ?>
+<?= $this->section('content') ?> 
+<h1>Produk </h1>
+<?php if (session()->getFlashData('success')) : ?>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <?= session()->getFlashData('success') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h4>Produk</h4>
-  <div>
-    <button class="btn btn-primary me-2" id="btnSearch"><i class="bx bx-search"></i> Search</button>
-    <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bx bx-plus"></i> Tambah Produk</button>
-    <button class="btn btn-danger" id="btnDownloadPdf"><i class="bx bx-file-pdf"></i> Download PDF</button>
-  </div>
-</div>
+<?php if (session()->getFlashData('failed')) : ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= session()->getFlashData('failed') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-        <th>#</th>
-      <th>Foto</th>
-      <th>Nama Produk</th>
-      <th>Harga</th>
-      <th>Jumlah</th>
-      <th>Sold</th>
-      <th class="text-end">Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php if (!empty($products) && is_array($products)): ?>
-      <?php foreach ($products as $product): ?>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+    Tambah Data
+</button>
+<a href="<?= base_url('produk/download') ?>" class="btn btn-success ms-2">Download Data</a>
+<!-- Table with stripped rows -->
+<table class="table datatable">
+    <thead>
         <tr>
-          <td><img src="<?= base_url('uploads/' . esc($product['foto'])) ?>" alt="<?= esc($product['nama']) ?>" style="width: 60px; height: auto;"></td>
-          <td><?= esc($product['nama']) ?></td>
-          <td><?= esc(number_format($product['harga'], 0, ',', '.')) ?></td>
-          <td><?= esc($product['jumlah']) ?></td>
-          <td><?= esc($product['sold_produk']) ?></td>
-          <td class="text-end">
-            <button class="btn btn-sm btn-warning me-2 btn-edit" data-id="<?= esc($product['id']) ?>"><i class="bx bx-edit"></i> Edit</button>
-            <button class="btn btn-sm btn-danger btn-delete" data-id="<?= esc($product['id']) ?>"><i class="bx bx-trash"></i> Hapus</button>
-          </td>
+            <th scope="col">#</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Jumlah</th>
+            <th scope="col">Foto</th>
+            <th scope="col"></th>
         </tr>
-      <?php endforeach; ?>
-    <?php else: ?>
-      <tr>
-        <td colspan="7" class="text-center">Tidak ada produk</td>
-      </tr>
-    <?php endif; ?>
-  </tbody>
-</table>
-
-<script>
-  document.getElementById('btnSearch').addEventListener('click', function() {
-    alert('Fungsi pencarian belum diimplementasikan.');
-  });
-
-  document.getElementById('btnAddProduct').addEventListener('click', function() {
-    alert('Fungsi tambah produk belum diimplementasikan.');
-  });
-
-  document.getElementById('btnDownloadPdf').addEventListener('click', function() {
-    alert('Fungsi download PDF belum diimplementasikan.');
-  });
-
-  document.querySelectorAll('.btn-edit').forEach(button => {
-    button.addEventListener('click', function() {
-      const id = this.getAttribute('data-id');
-      alert('Edit produk dengan ID: ' + id + ' belum diimplementasikan.');
-    });
-  });
-
-  document.querySelectorAll('.btn-delete').forEach(button => {
-    button.addEventListener('click', function() {
-      const id = this.getAttribute('data-id');
-      alert('Hapus produk dengan ID: ' + id + ' belum diimplementasikan.');
-    });
-  });
-</script>
-
-<?= $this->endSection() ?>
+    </thead>
+    <tbody>
+        <?php if (!empty($product) && is_array($product)) : ?>
+            <?php foreach ($product as $index => $produk) : ?>
+                <tr>
+                    <th scope="row"><?= $index + 1 ?></th>
+                    <td><?= $produk['nama'] ?></td>
+                    <td><?= $produk['harga'] ?></td>
+                    <td><?= $produk['jumlah'] ?></td>
+                    <td>
+                        <?php if ($produk['foto'] != '' && file_exists("img/" . $produk['foto'])) : ?>
+                            <img src="<?= base_url("img/" . $produk['foto']) ?>" width="100px">
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal-<?= $produk['id'] ?>">
+                            Ubah
+                        </button>
+                        <a href="<?= base_url('produk/delete/' . $produk['id']) ?>" class="btn btn-danger" onclick="return confirm('Yakin hapus data ini ?')">
+                            Hapus
+                        </a>
+                    </td>
+                </tr>
